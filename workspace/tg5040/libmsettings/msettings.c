@@ -324,7 +324,10 @@ static void setMixerDefaults(void) {
 		int value;
 	} values[] = {
 		{"Headphone Volume", 0},
-		{"digital volume", 0},
+		// Not "digital volume": it counts attenuation, so 0 is full scale, and
+		// InitSettings runs this in every new process (nextui after an app
+		// exits, each game). With background music playing that blip was an
+		// audible pop until SetFnMode re-applied the volume a moment later.
 	};
 	for (unsigned int i = 0; i < sizeof(values) / sizeof(values[0]); i++) {
 		struct mixer_ctl* ctl = mixer_get_ctl_by_name(mixer, values[i].name);
@@ -891,8 +894,9 @@ void SetHDMI(int value) {};
 void SetFnMode(int value) {
 	settings->fn_mode = value;
 	if (settings->fn_mode) {
-		if (GetFnVolume() != SETTINGS_DEFAULT_FN_NO_CHANGE)
-			SetRawVolume(scaleVolume(GetFnVolume()));
+		// Re-apply even when the FN volume is "Unchanged" so every process
+		// starts with the codec at the right level (issue #160).
+		SetRawVolume(scaleVolume(GetVolume()));
 		// custom mute mode display settings
 		if (GetFnBrightness() != SETTINGS_DEFAULT_FN_NO_CHANGE)
 			SetRawBrightness(scaleBrightness(GetFnBrightness()));
