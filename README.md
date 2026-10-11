@@ -11,7 +11,7 @@ After installing the update the new console backgrounds will be put in the defau
 - Neo Geo Pocket Color (NGPC)
 - Ports (PORTS)
 
-The extra Yumykon GBA and GBA Hacks backgrounds can be directly downloaded [here](https://github.com/bebeidon/nx-redux/tree/nxredux-1.13-plus/custom_backgrounds/Roms/Game%20Boy%20Advance%20(MGBA)/.media)
+The extra Yumykon GBA and GBA Hacks backgrounds can be directly downloaded [here](https://github.com/bebeidon/nx-redux/releases/tag/artbook_custom_backgrounds)
 
 ---
 <img width="400" height="300" alt="SCR_20261011_060336" src="https://github.com/user-attachments/assets/d01288e4-c971-4f60-9d82-eaecb4ea3243" />
