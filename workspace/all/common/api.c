@@ -4281,9 +4281,9 @@ void LEDS_setProfile(int profile) {
 		new_lights = lightsOff;
 		indicator = false;
 		break;
-	case LIGHT_PROFILE_LOW_BATTERY:
-		new_lights = lightsLowBattery;
-		break;
+	//case LIGHT_PROFILE_LOW_BATTERY:
+	//	new_lights = lightsLowBattery;
+	//	break;
 	case LIGHT_PROFILE_CRITICAL_BATTERY:
 		new_lights = lightsCriticalBattery;
 		break;
@@ -4341,7 +4341,7 @@ void LEDS_applyRules() {
 	// other rules
 	else if (pwr.initialized && SDL_AtomicGet(&pwr.charge) < PWR_LOW_CHARGE + 10 && SDL_AtomicGet(&pwr.charge) >= PWR_LOW_CHARGE) {
 		//LOG_info("LEDS_applyRules: low battery\n");
-		LEDS_setProfile(LIGHT_PROFILE_LOW_BATTERY);
+		//LEDS_setProfile(LIGHT_PROFILE_LOW_BATTERY);
 	}
 	// - if no other rule applies, use default (or temporary override)
 	// manual rules to be set on demand: LIGHT_PROFILE_SLEEP, LIGHT_PROFILE_AMBIENT
@@ -4399,15 +4399,13 @@ void LEDS_initLeds() {
 
 		// LIGHT_PROFILE_LOW_BATTERY
 		lightsLowBattery[i] = lightsDefault[i];
-	//	lightsLowBattery[i].effect = 1; // static
+	//	lightsLowBattery[i].effect = 3; // blink
 	//	lightsLowBattery[i].color1 = 0xFF3300;
 	//	lightsLowBattery[i].cycles = -1; // infinite
 
 		// LIGHT_PROFILE_CRITICAL_BATTERY
 		lightsCriticalBattery[i] = lightsDefault[i];
-		lightsCriticalBattery[i].effect = 1; // static
 		lightsCriticalBattery[i].color1 = 0xFF0000;
-		lightsCriticalBattery[i].cycles = -1; // infinite
 
 		// LIGHT_PROFILE_CHARGING
 		lightsCharging[i] = lightsDefault[i];
