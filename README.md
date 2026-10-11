@@ -5,6 +5,12 @@ This is a personal backport of **[nxredux.com](https://nxredux.com)**
 There are custom backgrounds with the art of [Yumykon](https://www.instagram.com/yumykon/) included.
 Thank you for giving permission to use your art in this project.
 
+After installing the update the new console backgrounds will be put in the default ROM folders:
+- Arcade (FBN)
+- Game Boy Advance (MGBA)
+- Neo Geo Pocket Color (NGPC)
+- Ports (PORTS)
+
 The extra Yumykon GBA and GBA Hacks backgrounds can be directly downloaded [here](https://github.com/bebeidon/nx-redux/tree/nxredux-1.13-plus/custom_backgrounds/Roms/Game%20Boy%20Advance%20(MGBA)/.media)
 
 ---
