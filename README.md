@@ -5,7 +5,7 @@ This is a personal backport of **[nxredux](https://nxredux.com)** based on 1.13 
 There are custom backgrounds with the art of [Yumykon](https://www.instagram.com/yumykon/) included.
 Thank you for giving permission to use your art in this project.
 
-After installing the update the new console backgrounds will be put in the default ROM folders:
+After installing the update the new backgrounds will be in the default Tools, Collections, "Recently Played" and ROM folders:
 - Arcade (FBN)
 - Game Boy Advance (MGBA)
 - Neo Geo Pocket Color (NGPC)
