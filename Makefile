@@ -46,7 +46,7 @@ ifeq ($(PLATFORM), desktop)
 else
 	TOOLCHAIN_FILE := Makefile.toolchain
 endif
-RELEASE_NAME ?= NXRedux-$(RELEASE_TIME)$(RELEASE_BETA)
+RELEASE_NAME ?= BRICK-UI-$(RELEASE_TIME)$(RELEASE_BETA)
 
 # Extra paks to ship
 VENDOR_DEST := ./build/VENDOR/Tools
