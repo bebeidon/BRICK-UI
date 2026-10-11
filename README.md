@@ -18,8 +18,8 @@ The extra Yumykon GBA and GBA Hacks backgrounds can be directly downloaded [here
 <img width="400" height="300" alt="SCR_20261011_060405" src="https://github.com/user-attachments/assets/8caa3a18-54da-4449-9e8c-864bf7c4a7b3" />
 <img width="400" height="300" alt="SCR_20261011_060422" src="https://github.com/user-attachments/assets/b51e1e37-ec6c-4981-ad5a-7aef8611626b" />
 <img width="400" height="300" alt="SCR_20261011_060402" src="https://github.com/user-attachments/assets/6ce046d6-e1b3-44dd-a98b-b8dac3a19acd" />
-<img width="400" height="300" alt="SCR_20261011_061303" src="https://github.com/user-attachments/assets/bc2e6168-7fff-489a-afc8-6ce1d80e0428" />
-<img width="400" height="300" alt="SCR_20261011_061156" src="https://github.com/user-attachments/assets/c5857610-02df-49d9-8d24-f00b90aacb02" />
+<img width="400" height="300" alt="SCR_20261011_122807" src="https://github.com/user-attachments/assets/a5873b53-180c-4f16-a5a8-42e2fa23567f" />
+<img width="400" height="300" alt="SCR_20261011_122734" src="https://github.com/user-attachments/assets/717bc248-13c4-4e31-a025-bf8ef4a4a556" />
 <img width="400" height="300" alt="SCR_20261011_090636" src="https://github.com/user-attachments/assets/de26ab03-39a8-4dee-9d48-166a1f9c63ba" />
 <img width="400" height="300" alt="SCR_20261011_091350" src="https://github.com/user-attachments/assets/2f50e9bd-00dc-446a-a4f3-c8b388c49782" />
 <img width="400" height="300" alt="SCR_20261011_060354" src="https://github.com/user-attachments/assets/f683cb74-5545-4040-b0f5-cdca4c5cc86e" />
