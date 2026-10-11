@@ -1,6 +1,6 @@
 # BRICK UI
 
-This is a personal backport of **[nxredux.com](https://nxredux.com)** based on 1.13 with backports from later releases too.
+This is a personal backport of **[nxredux.com](https://nxredux)** based on 1.13 with backports from later releases too.
 
 There are custom backgrounds with the art of [Yumykon](https://www.instagram.com/yumykon/) included.
 Thank you for giving permission to use your art in this project.
