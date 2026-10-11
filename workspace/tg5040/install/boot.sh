@@ -101,9 +101,9 @@ done
 if [ -f "$UPDATE_PATH" ]; then 
 	cd $(dirname "$0")/$PLATFORM
 	if [ -d "$SYSTEM_PATH" ]; then
-		echo "TEXT:Updating NX Redux" > /tmp/show2.fifo
+		echo "TEXT:Updating BRICK UI" > /tmp/show2.fifo
 	else
-		echo "TEXT:Installing NX Redux" > /tmp/show2.fifo
+		echo "TEXT:Installing BRICK UI" > /tmp/show2.fifo
 	fi
 
 	# clean replacement for core paths (shipped content is redux-owned; /Emus,
