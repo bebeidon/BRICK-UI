@@ -30,4 +30,4 @@ Modifications in this repository are also distributed under GPL-3.0.
 See the [LICENSE](LICENSE) file for details.
 
 
-> *NX Redux Backport is an independent fork and is not affiliated with the original NX Redux project.*
+> *BRICK UI is an independent fork and is not affiliated with the original NX Redux project.*
