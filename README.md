@@ -2,6 +2,8 @@
 
 This is a personal backport of **[nxredux.com](https://nxredux.com)**
 
+There are custom backgrounds with the art of [Yumykon](https://www.instagram.com/yumykon/) included.
+Thank you for giving permission to use your art in this project.
 
 
 ## License
