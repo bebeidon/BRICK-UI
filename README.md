@@ -1,9 +1,21 @@
-# NX Redux Backport
+# BRICK UI
 
 This is a personal backport of **[nxredux.com](https://nxredux.com)**
 
 There are custom backgrounds with the art of [Yumykon](https://www.instagram.com/yumykon/) included.
 Thank you for giving permission to use your art in this project.
+
+<img width="400" height="300" alt="SCR_20261011_060336" src="https://github.com/user-attachments/assets/d01288e4-c971-4f60-9d82-eaecb4ea3243" />
+<img width="400" height="300" alt="SCR_20261011_060405" src="https://github.com/user-attachments/assets/8caa3a18-54da-4449-9e8c-864bf7c4a7b3" />
+<img width="400" height="300" alt="SCR_20261011_060422" src="https://github.com/user-attachments/assets/b51e1e37-ec6c-4981-ad5a-7aef8611626b" />
+<img width="400" height="300" alt="SCR_20261011_060402" src="https://github.com/user-attachments/assets/6ce046d6-e1b3-44dd-a98b-b8dac3a19acd" />
+<img width="400" height="300" alt="SCR_20261011_061303" src="https://github.com/user-attachments/assets/bc2e6168-7fff-489a-afc8-6ce1d80e0428" />
+<img width="400" height="300" alt="SCR_20261011_061156" src="https://github.com/user-attachments/assets/c5857610-02df-49d9-8d24-f00b90aacb02" />
+<img width="400" height="300" alt="SCR_20261011_090636" src="https://github.com/user-attachments/assets/de26ab03-39a8-4dee-9d48-166a1f9c63ba" />
+<img width="400" height="300" alt="SCR_20261011_091350" src="https://github.com/user-attachments/assets/2f50e9bd-00dc-446a-a4f3-c8b388c49782" />
+<img width="400" height="300" alt="SCR_20261011_060354" src="https://github.com/user-attachments/assets/f683cb74-5545-4040-b0f5-cdca4c5cc86e" />
+<img width="400" height="300" alt="SCR_20261011_060358" src="https://github.com/user-attachments/assets/b46f0307-9a0d-47c9-9e8f-983c65aa56bd" />
+
 
 
 ## License
