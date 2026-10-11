@@ -384,7 +384,7 @@ int main(int argc, char* argv[]) {
                 			menu_title = dir_title;
         			}
 			} else
-				menu_title = "BRICK HAMMER";
+				menu_title = "BRICK UI";
 			int ow = UI_renderMenuBar(screen, menu_title);
 
 			// capture menu bar for fixed overlay during animation
