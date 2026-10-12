@@ -99,6 +99,10 @@ static volatile bool ra_sync_cancel = false;
 static bool ra_sync_started = false;
 static char ra_sync_user[64]; // the worker's own copies: RA_quit may detach it
 static char ra_sync_token[64];
+
+// RA_init runs before Notification_init, which drops earlier pushes: its
+// notice waits here for RA_loadGame
+static const char* ra_init_notice = NULL;
 // how long quitting the game may wait for its final upload
 #define RA_QUIT_SYNC_WAIT_MS 3000
 
@@ -1202,14 +1206,12 @@ void RA_init(void) {
 	if (!online) {
 		if (!RA_Offline_hasLoginCache()) {
 			RA_LOG_WARN("Offline with no cached login - RA disabled this session\n");
-			Notification_push(NOTIFICATION_ACHIEVEMENT,
-							  "RetroAchievements requires WiFi for first-time setup", NULL);
+			ra_init_notice = "RetroAchievements requires WiFi for first-time setup";
 			return;
 		}
 		RA_Offline_setMode(RA_NET_OFFLINE);
 		RA_LOG_INFO("Starting in offline mode (softcore)\n");
-		Notification_push(NOTIFICATION_ACHIEVEMENT,
-						  "RetroAchievements: offline (softcore)", NULL);
+		ra_init_notice = "RetroAchievements: offline (softcore)";
 	}
 
 	RA_LOG_INFO("Initializing...\n");
@@ -1494,6 +1496,10 @@ static void ra_do_load_game(const char* rom_path, const uint8_t* rom_data, size_
 }
 
 void RA_loadGame(const char* rom_path, const uint8_t* rom_data, size_t rom_size, const char* emu_tag) {
+	if (ra_init_notice) {
+		Notification_push(NOTIFICATION_ACHIEVEMENT, ra_init_notice, NULL);
+		ra_init_notice = NULL;
+	}
 	if (!ra_client || !CFG_getRAEnable()) {
 		return;
 	}
