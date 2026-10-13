@@ -478,46 +478,19 @@ package: tidy
 		echo "  assembling .tmp_update"; \
 		cp -R ./build/BOOT/.tmp_update ./build/PAYLOAD-$$dev/.tmp_update; \
 		\
-		echo "  resolving bg images for $$dev ($$bg_res)"; \
-		find ./build/BASE/Collections ./build/BASE/Favorites \
-			"./build/BASE/Recently Played" ./build/BASE/Roms \
-			-path '*/.media/bg-'"$$bg_res"'.png' 2>/dev/null \
-		| while read f; do \
-			cp "$$f" "$$(dirname "$$f")/bg.png"; \
-		done; \
-		\
-		echo "  installing custom backgrounds"; \
-		./custom_backgrounds/install-backgrounds.sh ./build/BASE || exit 1; \
-		\
 		echo "  assembling Emus/shared"; \
 		mkdir -p ./build/PAYLOAD-$$dev/Emus; \
 		cp -R ./build/BASE/Emus/shared ./build/PAYLOAD-$$dev/Emus/shared; \
 		\
-		echo "  assembling custom background files in update payload"; \
-		for folder in "Tools" "Collections" "Recently Played"; do \
-			mkdir -p "./build/PAYLOAD-$$dev/$$folder/.media"; \
-			cp "./build/BASE/$$folder/.media/bg.png" "./build/PAYLOAD-$$dev/$$folder/.media/bg.png" || exit 1; \
-		done; \
-		for tag in MGBA FBN NGPC PORTS; do \
-			found=0; \
-			for dir in ./build/BASE/Roms/*" ($$tag)"; do \
-				[ -d "$$dir" ] || continue; \
-				found=1; \
-				name=$${dir##*/}; \
-				mkdir -p "./build/PAYLOAD-$$dev/Roms/$$name/.media"; \
-				cp "$$dir/.media/bg.png" "./build/PAYLOAD-$$dev/Roms/$$name/.media/bg.png" || exit 1; \
-			done; \
-			if [ "$$found" -eq 0 ]; then \
-				echo "ERROR: No ROM folder found matching ($$tag)"; \
-				exit 1; \
-			fi; \
-		done; \
+		echo "  assembling Tools/.media ($$bg_res)"; \
+		mkdir -p ./build/PAYLOAD-$$dev/Tools/.media; \
+		cp ./build/BASE/Tools/.media/bg-$$bg_res.png ./build/PAYLOAD-$$dev/Tools/.media/bg.png; \
 		\
 		echo "  creating device marker $$plat-$$dev"; \
 		touch ./build/PAYLOAD-$$dev/$$plat-$$dev; \
 		\
-		echo "  creating MinUI.zip with custom backgrounds"; \
-		cd ./build/PAYLOAD-$$dev && zip -r MinUI.zip .system .tmp_update Emus Tools Collections "Recently Played" Roms $$plat-$$dev && cd ../..; \
+		echo "  creating MinUI.zip"; \
+		cd ./build/PAYLOAD-$$dev && zip -r MinUI.zip .system .tmp_update Emus Tools $$plat-$$dev && cd ../..; \
 		cp ./build/PAYLOAD-$$dev/MinUI.zip ./build/BASE/MinUI-$$dev.zip; \
 		\
 		echo "  resolving overlays for $$dev ($$overlay_res)"; \
@@ -529,6 +502,14 @@ package: tidy
 					fi; \
 				done; \
 			fi; \
+		done; \
+		\
+		echo "  resolving bg images for $$dev ($$bg_res)"; \
+		find ./build/BASE/Collections ./build/BASE/Favorites \
+			"./build/BASE/Recently Played" ./build/BASE/Roms \
+			-path '*/.media/bg-'"$$bg_res"'.png' 2>/dev/null \
+		| while read f; do \
+			cp "$$f" "$$(dirname "$$f")/bg.png"; \
 		done; \
 		\
 		echo "  creating release zip"; \
@@ -546,7 +527,6 @@ package: tidy
 		find ./build/BASE/Collections ./build/BASE/Favorites \
 			"./build/BASE/Recently Played" ./build/BASE/Roms \
 			-name "bg.png" -path '*/.media/*' -delete 2>/dev/null; \
-		rm -f ./build/BASE/Tools/.media/bg.png; \
 		for overlay_root in ./build/BASE/Overlays; do \
 			if [ -d "$$overlay_root" ]; then \
 				find "$$overlay_root" -mindepth 1 -maxdepth 1 -type d | while read emu_dir; do \
