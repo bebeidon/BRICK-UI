@@ -496,8 +496,12 @@ package: tidy
 		echo "  creating device marker $$plat-$$dev"; \
 		touch ./build/PAYLOAD-$$dev/$$plat-$$dev; \
 		\
+		echo "  assembling Shaders"; \
+		mkdir -p ./build/PAYLOAD-$$dev/Shaders; \
+		cp -R ./build/BASE/Shaders/. ./build/PAYLOAD-$$dev/Shaders/; \
+		\
 		echo "  creating MinUI.zip"; \
-		cd ./build/PAYLOAD-$$dev && zip -r MinUI.zip .system .tmp_update Emus Tools Collections "Recently Played" $$plat-$$dev && cd ../..; \
+		cd ./build/PAYLOAD-$$dev && zip -r MinUI.zip .system .tmp_update Emus Tools Collections "Recently Played" Shaders $$plat-$$dev && cd ../..; \
 		cp ./build/PAYLOAD-$$dev/MinUI.zip ./build/BASE/MinUI-$$dev.zip; \
 		\
 		echo "  resolving overlays for $$dev ($$overlay_res)"; \
