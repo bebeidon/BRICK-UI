@@ -4405,6 +4405,7 @@ void LEDS_initLeds() {
 
 		// LIGHT_PROFILE_CRITICAL_BATTERY
 		lightsCriticalBattery[i] = lightsDefault[i];
+		lightsLowBattery[i].effect = 4; // static
 		lightsCriticalBattery[i].color1 = 0xFF0000;
 
 		// LIGHT_PROFILE_CHARGING
