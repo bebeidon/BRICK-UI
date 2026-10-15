@@ -37,6 +37,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+
 static bool gl_simple_mode = false;
 
 static ScrollTextState list_scroll = {0};
@@ -202,7 +203,7 @@ static void reloadDirectoryAt(int idx, int keep_selected) {
 		sel = 0;
 	fresh->selected = sel;
 
-	int rc = MAIN_ROW_COUNT - 1;
+	int rc = MAIN_ROW_COUNT;
 	fresh->start = 0;
 	fresh->end = (n < rc) ? n : rc;
 	if (sel >= fresh->end && n > rc) {
@@ -1097,7 +1098,7 @@ GameListResult GameList_handleInput(unsigned long now, int currentScreen,
 
 	int selected = top->selected;
 	int total = top->entries->count;
-	int row_count = MAIN_ROW_COUNT - 1;
+	int row_count = MAIN_ROW_COUNT;
 
 	if (PAD_tappedMenu(now) && !ContextMenu_isOpen()) {
 		// Open contextual menu based on current page
@@ -1479,7 +1480,7 @@ void GameList_render(SDL_Surface* screen, int lastScreen,
 									   SCALE1(PADDING * 2));
 			char sel_trunc[256];
 			int sel_pill_w = UI_calcListPillWidth(font.large, sel_text, sel_trunc, sel_avail, 0);
-			int target_y = SCALE1(PADDING + PILL_SIZE + selected_row * PILL_SIZE);
+			int target_y = SCALE1(PADDING + selected_row * PILL_SIZE);
 			// A page/list change (folder enter/exit — the `top` directory pointer
 			// changes) snaps the pill to the new selection instead of gliding in
 			// from the previous list's row, which briefly flashed the old position.
@@ -1517,8 +1518,8 @@ void GameList_render(SDL_Surface* screen, int lastScreen,
 			// menu bar (top) or button hint bar (bottom). Clipped, the incoming
 			// pill is revealed only through the first/last row.
 			int band_rows = top->end - top->start;
-			SDL_Rect band = {0, SCALE1(PADDING + PILL_SIZE),
-							 screen->w, SCALE1(band_rows * PILL_SIZE)};
+			SDL_Rect band = {0, SCALE1(PADDING),
+				screen->w, SCALE1(band_rows * PILL_SIZE)};
 			SDL_Rect prev_clip;
 			SDL_GetClipRect(screen, &prev_clip);
 			SDL_SetClipRect(screen, &band);
@@ -1546,7 +1547,7 @@ void GameList_render(SDL_Surface* screen, int lastScreen,
 				trimSortingMeta(&entry_unique);
 			char* display_text = entry_unique ? entry_unique : entry_name;
 
-			int top_offset = PILL_SIZE;
+			int top_offset = 0;
 			int y = SCALE1(PADDING + top_offset + j * PILL_SIZE);
 
 			if (list_show_entry_names) {
@@ -1614,7 +1615,7 @@ void GameList_render(SDL_Surface* screen, int lastScreen,
 				}
 			}
 		}
-		UI_renderScrollIndicators(screen, top->start, MAIN_ROW_COUNT - 1, total);
+		//UI_renderScrollIndicators(screen, top->start, MAIN_ROW_COUNT - 1, total);
 
 		if (lastScreen == SCREEN_OFF) {
 			GFX_animateSurfaceOpacity(blackBG, 0, 0, screen->w, screen->h, 255,
