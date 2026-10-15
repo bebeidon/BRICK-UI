@@ -385,7 +385,10 @@ int main(int argc, char* argv[]) {
         			}
 			} else
 				menu_title = "BRICK UI";
-			int ow = UI_renderMenuBar(screen, menu_title);
+			int ow = UI_renderMenuBar(
+				screen,
+				currentScreen == SCREEN_GAMELIST ? "" : menu_title
+			);
 
 			// capture menu bar for fixed overlay during animation
 			SDL_Surface* menuBarSurface = NULL;

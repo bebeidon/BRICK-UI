@@ -479,10 +479,10 @@ void UI_renderSettingsPageEx(SDL_Surface* screen, ListLayout* layout,
 	if (desc_rows > total_rows - 1)
 		desc_rows = total_rows - 1;
 	layout->item_h = layout->list_h / total_rows;
-	layout->items_per_page = total_rows - desc_rows;
+	layout->items_per_page = total_rows - 1;
 	// Quarter-row top inset (was half): the reclaimed space goes to the
 	// description area below the list, which fits two lines instead of one.
-	int y_offset = layout->item_h / 4;
+	// int y_offset = layout->item_h / 4;
 
 	UI_adjustListScroll(selected, scroll, layout->items_per_page);
 
@@ -494,7 +494,7 @@ void UI_renderSettingsPageEx(SDL_Surface* screen, ListLayout* layout,
 	for (int vi = start; vi < end; vi++) {
 		UISettingsItem* item = &items[vi];
 		int sel = (vi == selected);
-		int item_y = layout->list_y + y_offset + (vi - start) * layout->item_h;
+		int item_y = layout->list_y + (vi - start) * layout->item_h;
 
 		// Custom draw override
 		if (item->custom_draw) {
@@ -523,7 +523,7 @@ void UI_renderSettingsPageEx(SDL_Surface* screen, ListLayout* layout,
 
 	// Status message centered below items (e.g. "Scanning for networks...")
 	if (status_msg && status_msg[0] && count < layout->items_per_page) {
-		int msg_row_y = layout->list_y + y_offset + count * layout->item_h;
+		int msg_row_y = layout->list_y + count * layout->item_h;
 		int empty_h = (layout->items_per_page - count) * layout->item_h;
 		int msg_y = msg_row_y + (empty_h - TTF_FontHeight(font.small)) / 2;
 		SDL_Surface* msg_surf = GFX_renderText(font.small, status_msg, COLOR_GRAY);
@@ -537,7 +537,7 @@ void UI_renderSettingsPageEx(SDL_Surface* screen, ListLayout* layout,
 	// Description text below the list — up to two centered lines
 	if (selected >= 0 && selected < count &&
 		items[selected].desc && items[selected].desc[0]) {
-		int area_y = layout->list_y + y_offset + layout->items_per_page * layout->item_h;
+		int area_y = layout->list_y + layout->items_per_page * layout->item_h;
 		int area_b = layout->list_y + layout->list_h - SCALE1(8); // keep clear of the bottom scroll arrow
 		int desc_max_w = hw - SCALE1(PADDING * 2);
 		int line_h = TTF_FontHeight(font.tiny);
@@ -797,8 +797,8 @@ void UI_renderScrollIndicators(SDL_Surface* screen, int scroll, int items_per_pa
 		GFX_blitAsset(ASSET_SCROLL_UP, NULL, screen, &(SDL_Rect){ox, SCALE1(PADDING + PILL_SIZE - BUTTON_MARGIN)});
 	}
 	if (scroll + items_per_page < total_count) {
-		int bottom_y = hh - SCALE1(PADDING + BUTTON_SIZE + BUTTON_MARGIN) - SCALE1(8);
-		GFX_blitAsset(ASSET_SCROLL_DOWN, NULL, screen, &(SDL_Rect){ox, bottom_y});
+		//int bottom_y = hh - SCALE1(PADDING + BUTTON_SIZE + BUTTON_MARGIN) - SCALE1(8);
+		GFX_blitAsset(ASSET_SCROLL_DOWN, NULL, screen, &(SDL_Rect){ox, hh - SCALE1(PADDING + BUTTON_SIZE + BUTTON_MARGIN)});
 	}
 }
 

@@ -433,7 +433,7 @@ static Array* pathToStack(const char* path) {
 	// Always include root directory
 	Directory* root_dir = Directory_new(SDCARD_PATH, 0);
 	root_dir->start = 0;
-	int root_rows = MAIN_ROW_COUNT - 1;
+	int root_rows = MAIN_ROW_COUNT;
 	root_dir->end = (root_dir->entries->count < root_rows) ? root_dir->entries->count : root_rows;
 	Array_push(array, root_dir);
 
@@ -540,7 +540,7 @@ void openDirectory(char* path, int auto_launch) {
 		}
 
 		top = Directory_new(path, selected);
-		int rc = MAIN_ROW_COUNT - 1;
+		int rc = MAIN_ROW_COUNT;
 		int count = top->entries->count;
 		if (selected >= count || end > count) {
 			// saved state can outlive the listing it described (entries
@@ -570,7 +570,7 @@ void openDirectory(char* path, int auto_launch) {
 			// to root rather than indexing items[-1]
 			top = Directory_new(SDCARD_PATH, 0);
 			top->start = 0;
-			int rc = MAIN_ROW_COUNT - 1;
+			int rc = MAIN_ROW_COUNT;
 			top->end = (top->entries->count < rc) ? top->entries->count : rc;
 			Array_push(stack, top);
 		} else {
@@ -691,7 +691,7 @@ void loadLast(void) { // call after loading root directory
 				if (exactMatch(entry->path, path) || (strlen(collated_path) && prefixMatch(collated_path, entry->path) && isConsoleDir(entry->path)) || (prefixMatch(COLLECTIONS_PATH, full_path) && suffixMatch(filename, entry->path)) || (prefixMatch(paks_tools_path, entry->path) && suffixMatch(slash_name, entry->path))) {
 					top->selected = i;
 					if (i >= top->end) {
-						int lrc = MAIN_ROW_COUNT - 1;
+						int lrc = MAIN_ROW_COUNT;
 						top->start = i;
 						top->end = top->start + lrc;
 						if (top->end > top->entries->count) {
