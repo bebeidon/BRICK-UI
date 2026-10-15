@@ -7,7 +7,7 @@ int UI_renderMenuBar(SDL_Surface* screen, const char* title) {
 	// Semi-transparent bar background (cached between calls)
 	static SDL_Surface* menu_bar = NULL;
 	int bar_h = SCALE1(BUTTON_SIZE) + SCALE1(BUTTON_MARGIN * 2);
-	if (!UI_getScrim(&menu_bar, screen->w, bar_h))
+	if (!UI_getTransparentScrim(&menu_bar, screen->w, bar_h))
 		return 0;
 	SDL_BlitSurface(menu_bar, NULL, screen, &(SDL_Rect){0, 0});
 
@@ -42,6 +42,22 @@ SDL_Surface* UI_captureMenuBar(SDL_Surface* screen) {
 	SDL_FillRect(bar, NULL, SDL_MapRGBA(bar->format, 0, 0, 0, 255));
 	SDL_BlitSurface(screen, &(SDL_Rect){0, 0, screen->w, bar_h}, bar, NULL);
 	return bar;
+}
+
+SDL_Surface* UI_getTransparentScrim(SDL_Surface** cache, int w, int h) {
+	SDL_Surface* scrim = *cache;
+	if (!scrim || scrim->w != w || scrim->h != h) {
+		if (scrim)
+			SDL_FreeSurface(scrim);
+		scrim = SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, 32,
+									 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
+		if (scrim) {
+			SDL_FillRect(scrim, NULL, SDL_MapRGBA(scrim->format, 0, 0, 0, 0));
+			SDL_SetSurfaceBlendMode(scrim, SDL_BLENDMODE_BLEND);
+		}
+		*cache = scrim;
+	}
+	return scrim;
 }
 
 int UI_statusBarChanged(void) {

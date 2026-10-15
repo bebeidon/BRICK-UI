@@ -43,7 +43,7 @@ int UI_renderButtonHintBar(SDL_Surface* dst, char** pairs) {
 	int oy = dst->h - bar_h;
 
 	static SDL_Surface* button_bar = NULL;
-	if (!UI_getScrim(&button_bar, dst->w, bar_h))
+	if (!UI_getTransparentScrim(&button_bar, dst->w, bar_h))
 		return 0;
 	SDL_BlitSurface(button_bar, NULL, dst, &(SDL_Rect){0, oy});
 
