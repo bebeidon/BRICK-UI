@@ -1369,6 +1369,16 @@ GameListResult GameList_handleInput(unsigned long now, int currentScreen,
 	return result;
 }
 
+static int listRowPitch(SDL_Surface* screen) {
+	int pill = SCALE1(PILL_SIZE);
+	int avail = screen->h - SCALE1(PADDING) -
+	SCALE1(PADDING + BUTTON_SIZE + BUTTON_MARGIN) - SCALE1(2);
+	int gap = (avail - MAIN_ROW_COUNT * pill) / (MAIN_ROW_COUNT - 1);
+	if (gap < 0)
+		gap = 0;
+	return pill + gap;
+}
+
 void GameList_render(SDL_Surface* screen, int lastScreen,
 					 IndicatorType show_setting, SDL_Surface* blackBG) {
 	int total = top->entries->count;
@@ -1459,6 +1469,7 @@ void GameList_render(SDL_Surface* screen, int lastScreen,
 	}
 
 	if (total > 0) {
+		int pitch = listRowPitch(screen);
 		int selected_row = top->selected - top->start;
 
 		// Glide the selection pill to the selected row. Drawn here, decoupled from
@@ -1480,7 +1491,7 @@ void GameList_render(SDL_Surface* screen, int lastScreen,
 									   SCALE1(PADDING * 2));
 			char sel_trunc[256];
 			int sel_pill_w = UI_calcListPillWidth(font.large, sel_text, sel_trunc, sel_avail, 0);
-			int target_y = SCALE1(PADDING + selected_row * PILL_SIZE);
+			int target_y = SCALE1(PADDING) + selected_row * pitch;
 			// A page/list change (folder enter/exit — the `top` directory pointer
 			// changes) snaps the pill to the new selection instead of gliding in
 			// from the previous list's row, which briefly flashed the old position.
@@ -1498,9 +1509,9 @@ void GameList_render(SDL_Surface* screen, int lastScreen,
 			if (target_y != list_pill_target || list_changed) {
 				bool animate = list_pill_target >= 0 && !ContextMenu_isOpen() && !list_changed;
 				if (wrap_fwd)
-					list_pill_anim.current_y = target_y - SCALE1(PILL_SIZE);
+					list_pill_anim.current_y = target_y - pitch;
 				else if (wrap_bwd)
-					list_pill_anim.current_y = target_y + SCALE1(PILL_SIZE);
+					list_pill_anim.current_y = target_y + pitch;
 				UI_pillAnimSetTarget(&list_pill_anim, target_y, sel_pill_w, animate);
 				list_pill_target = target_y;
 			}
@@ -1519,7 +1530,7 @@ void GameList_render(SDL_Surface* screen, int lastScreen,
 			// pill is revealed only through the first/last row.
 			int band_rows = top->end - top->start;
 			SDL_Rect band = {0, SCALE1(PADDING),
-				screen->w, SCALE1(band_rows * PILL_SIZE)};
+				screen->w, band_rows * pitch};
 			SDL_Rect prev_clip;
 			SDL_GetClipRect(screen, &prev_clip);
 			SDL_SetClipRect(screen, &band);
@@ -1548,7 +1559,7 @@ void GameList_render(SDL_Surface* screen, int lastScreen,
 			char* display_text = entry_unique ? entry_unique : entry_name;
 
 			int top_offset = 0;
-			int y = SCALE1(PADDING + top_offset + j * PILL_SIZE);
+			int y = SCALE1(PADDING + top_offset) + j * pitch;
 
 			if (list_show_entry_names) {
 				char truncated[256];
@@ -1594,7 +1605,7 @@ void GameList_render(SDL_Surface* screen, int lastScreen,
 				// background. The marquee still waits until the pill has fully
 				// settled on the actual selection (and the context menu is closed).
 				bool pill_over = pill_y >= 0 &&
-								 abs(pill_y - y) * 2 < SCALE1(PILL_SIZE);
+								 abs(pill_y - y) * 2 < pitch;
 				bool use_marquee = row_is_selected && !pill_animating &&
 								   !ContextMenu_isOpen();
 				if (entry_unique && !use_marquee &&
